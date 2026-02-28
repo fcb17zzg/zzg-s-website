@@ -40,7 +40,7 @@ export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) 
 
   return (
     <section className="space-y-6">
-      <div className="flex flex-wrap gap-2 border-b border-gray-100 pb-3">
+      <div className="flex flex-wrap gap-2 border-b border-warm-300/60 pb-3">
         {tabs.map((tab) => {
           const href = tab.key === 'all' ? '/thoughts' : `/thoughts?category=${tab.key}`;
           const isActive = activeCategory === tab.key;
@@ -49,7 +49,7 @@ export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) 
             <Link
               key={tab.key}
               href={href}
-              className={`rounded px-3 py-1.5 text-sm transition-colors duration-200 ${isActive ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              className={`rounded-lg px-3 py-1.5 text-sm transition-all duration-200 ${isActive ? 'bg-ink-900 text-warm-50 shadow-sm' : 'bg-warm-200 text-ink-600 hover:bg-warm-300'}`}
               aria-current={isActive ? 'page' : undefined}
             >
               {tab.label}

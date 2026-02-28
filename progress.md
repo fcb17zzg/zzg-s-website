@@ -1,20 +1,20 @@
 # 项目进度（Progress）
 
-更新时间：2026-02-28
+更新时间：2026-02-28（M4 已完成）
 
 ## 项目概览
 
 - 项目：个人多页面网站（Next.js App Router + TypeScript）
 - 目标：内容可发布、体验可用、可部署上线
-- 当前阶段：MVP 后半程（M2 完成，M3 联调中）
+- 当前阶段：MVP 完成（已上线，可持续迭代）
 
 ## 里程碑
 
 - [x] M0：PRD 明确与访谈决策冻结
 - [x] M1：布局与导航基线完成
 - [x] M2：内容系统（blog/life/thoughts）打通
-- [ ] M3：体验基线（移动端 + a11y + SEO）
-- [ ] M4：构建通过并部署到 Vercel
+- [x] M3：体验基线（移动端 + a11y + SEO）
+- [x] M4：构建通过并部署到 Vercel
 
 ## 已完成
 
@@ -46,20 +46,26 @@
 - [x] 全站 `npm run build` 持续通过（含 Home/Blog/Life/Thoughts）
 - [x] 修复 lint 流程（迁移到 ESLint flat config，`npm run lint` 可执行）
 - [x] 全站自动化联调完成（lint + build）
+- [x] Navbar 可访问性补强（移动端菜单 `aria-controls` + WeChat 复制反馈 `aria-live`）
+- [x] 全站联调复验完成（`npm run lint` + `npm run build`，构建继续通过）
+- [x] Vercel CLI 登录恢复并完成生产部署
+- [x] 线上可用地址确认：`https://mypersonalpage-swart.vercel.app`
+- [x] 线上回归通过（`/`、`/blog`、`/blog/hello-static-blog`、`/life`、`/thoughts` 可访问）
 
 ## 进行中
 
-- [ ] 全站联调（路由高亮、移动端导航、可访问性）
+- [ ] 无（当前阶段无进行中事项）
 
 ## 待办（按优先级）
 
-1. 全站联调（路由高亮、移动端导航、可访问性）
-2. 连接 Vercel 完成上线验证
+1. （可选）将 Vercel 项目与 GitHub 仓库重新绑定，启用自动部署
+2. （可选）优化 `/life` 图片为 `next/image`，消除 lint warning
 
 ## 风险与阻塞
 
-- 当前无阻塞
+- 当前无阻塞（线上已可访问）
 - 风险：空状态策略为“直接留白”，可发现性较弱，后续可能需要回调
+- 风险：Vercel 本次未成功自动关联 GitHub 仓库，后续推送不会自动触发部署（可手动修复）
 - 风险：`/life` 页面使用外链 `<img>`，当前 lint 为 warning（性能可优化项，非阻塞）
 
 ## 决策日志
@@ -70,14 +76,18 @@
 - 2026-02-28：视觉主轴为极简理性，浅底色卡片，宽松阅读密度
 - 2026-02-28：社交入口为 GitHub / LinkedIn / WeChat（复制）/ Email
 - 2026-02-28：thoughts 页面采用 Tab + 列表
+- 2026-02-28：M3 收敛完成，进入 M4（Vercel 上线验证）
+- 2026-02-28：Vercel 生产部署完成，M4 达成
 
 ## 下一步（执行顺序）
 
-- 先做手动联调（桌面/移动端/键盘可达）
-- 再连接 Vercel 完成上线验证
+- 可选：在 Vercel Dashboard 中补齐 GitHub Repo 绑定，恢复自动部署
+- 可选：做一轮移动端真机回归（菜单展开/收起、键盘焦点）
 
 ## 新 Session 交接要点
 
 - 内容链路已完成：`/blog`、`/life`、`/thoughts` 均可渲染并参与构建
 - 自动化检查现状：`npm run build` 通过，`npm run lint` 通过（含 1 条非阻塞 warning）
-- 联调重点：移动端菜单收起行为、导航高亮一致性、键盘焦点可见与可达
+- 联调已收敛：路由高亮、移动端菜单收起与焦点可见性已在实现与构建层验证
+- 线上已可用：`https://mypersonalpage-swart.vercel.app`
+- 当前重点：是否启用 GitHub 自动部署与后续性能优化

@@ -7,24 +7,26 @@ type MomentCardProps = {
 
 export default function MomentCard({ post }: MomentCardProps) {
   return (
-    <article className="rounded-lg border border-gray-100 bg-white p-5">
+    <article className="rounded-2xl border border-warm-300/60 bg-warm-50 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 animate-fade-up">
       {post.cover ? (
         <img
           src={post.cover}
           alt={post.title}
-          className="mb-4 h-52 w-full rounded-md object-cover"
+          className="h-52 w-full object-cover"
           loading="lazy"
         />
       ) : null}
 
-      <h3 className="text-lg font-semibold text-gray-900">{post.title}</h3>
-      {post.summary ? <p className="mt-2 text-sm text-gray-600 leading-6">{post.summary}</p> : null}
+      <div className="p-5">
+        <h3 className="font-serif text-lg text-ink-900">{post.title}</h3>
+        {post.summary ? <p className="mt-2 text-sm text-ink-600 leading-6">{post.summary}</p> : null}
 
-      {post.content ? (
-        <div className="mt-4 prose prose-neutral max-w-none">
-          <MDXRemote source={post.content} />
-        </div>
-      ) : null}
+        {post.content ? (
+          <div className="mt-4 prose prose-neutral max-w-none text-sm">
+            <MDXRemote source={post.content} />
+          </div>
+        ) : null}
+      </div>
     </article>
   );
 }

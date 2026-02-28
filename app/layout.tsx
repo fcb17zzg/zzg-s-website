@@ -1,6 +1,19 @@
 import type { Metadata } from 'next';
+import { Lora, Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
+
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-lora',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -12,8 +25,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN">
-      <body className="bg-white text-gray-800 antialiased">
+    <html lang="zh-CN" className={`${lora.variable} ${inter.variable}`}>
+      <body className="bg-warm-50 text-ink-700 antialiased">
         <Navbar />
         <main className="max-w-2xl mx-auto px-4 py-12">{children}</main>
       </body>

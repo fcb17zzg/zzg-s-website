@@ -142,9 +142,21 @@ next-mdx-remote
 
 - 整体气质：极简理性（大留白、低对比、信息克制）
 - 强调策略：轻微颜色变化 + 字重变化
-- 卡片策略：首页中后段采用“非常浅底色卡片”
+- 卡片策略：首页中后段采用”非常浅底色卡片”
 - 动效边界：仅保留 hover/focus 微交互；页面切换动效后置
 - 阅读密度：宽松（更大行高和段间距）
+
+### 视觉系统 v2（2026-02-28 迭代）
+
+- 整体气质升级为”温暖生活感”：暖米色底 + 暖棕文字 + 鼠尾草绿强调色
+- 颜色系统：`warm-*`（背景层次）+ `ink-*`（文字层次）+ `sage-*`（强调色）
+- 字体：Lora（serif，标题）+ Inter（sans，正文）+ 中文 fallback PingFang SC
+- 动画：CSS 原生弹性 fade-up 入场（cubic-bezier 过冲感）+ stagger 列表 + 卡片 hover 上浮
+- 导航：sticky + backdrop-blur，激活态用 sage 绿下划线
+- 卡片：rounded-2xl，warm-100 底色，shadow-sm → hover:shadow-lg
+- 强调色：鼠尾草绿（sage）用于链接、分类 badge、项目标签
+- 头像：next/image 加载 /images/个人头像.jpg，圆形 + warm-300 描边
+- 无需新增 npm 依赖
 
 ### 3) 页面级展示规范
 

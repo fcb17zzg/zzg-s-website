@@ -13,6 +13,7 @@ function normalizePostMeta(slug: string, data: Record<string, unknown>): Post {
     tags: Array.isArray(data.tags) ? data.tags.filter((tag): tag is string => typeof tag === 'string') : [],
     summary: typeof data.summary === 'string' ? data.summary : '',
     category: typeof data.category === 'string' ? data.category : undefined,
+    cover: typeof data.cover === 'string' ? data.cover : undefined,
   };
 }
 

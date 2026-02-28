@@ -1,8 +1,10 @@
 export const profile = {
-  name: "Your Name",
-  bio: "软件工程师 / 终身学习者",
+  name: 'zzg',
+  headline: '构建可靠 Web 产品的全栈工程师',
+  bio: '关注工程效率、产品可用性与长期可维护性。这里记录技术实践、项目复盘和持续学习。',
   location: "中国",
-  github: "https://github.com/yourusername",
+  github: 'https://github.com/fcb17zzg',
+  tags: ['全栈开发', 'TypeScript', '系统化思考'],
 };
 
 export const navigationLinks = [
@@ -28,17 +30,17 @@ export const techStack = ["TypeScript", "React", "Next.js", "Node.js", "Python",
 
 export const projects = [
   {
-    name: "项目一",
-    desc: "项目描述",
-    url: "https://github.com/yourusername/project1",
-    tags: ["Next.js", "TypeScript"],
+    name: '个人网站（当前项目）',
+    desc: '基于 Next.js App Router 的多页面个人站，支持 Markdown 内容驱动与静态生成。',
+    url: 'https://github.com/fcb17zzg/zzg-s-website',
+    tags: ['Next.js', 'TypeScript', 'SSG'],
   },
   {
-    name: "项目二",
-    desc: "项目描述",
-    url: "https://github.com/yourusername/project2",
-    tags: ["Python", "FastAPI"],
+    name: '工程实践记录集',
+    desc: '沉淀常用脚手架、脚本与开发流程模板，提升个人项目交付效率。',
+    url: 'https://github.com/fcb17zzg',
+    tags: ['Node.js', 'Python'],
   },
 ];
 
-export const hobbies = ["阅读", "摄影", "骑行", "音乐"];
+export const hobbies = ['阅读', '摄影', '骑行', '音乐'];

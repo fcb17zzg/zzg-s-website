@@ -3,7 +3,11 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 
 export const metadata: Metadata = {
-  title: "zzg's website",
+  title: {
+    default: "zzg's website",
+    template: "%s | zzg's website",
+  },
+  description: '个人网站，记录技术实践、生活片段与随想。',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

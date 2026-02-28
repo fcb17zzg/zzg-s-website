@@ -6,13 +6,13 @@
 
 - 项目：个人多页面网站（Next.js App Router + TypeScript）
 - 目标：内容可发布、体验可用、可部署上线
-- 当前阶段：MVP 实施中（文档与导航基线已落地）
+- 当前阶段：MVP 后半程（M2 完成，M3 联调中）
 
 ## 里程碑
 
 - [x] M0：PRD 明确与访谈决策冻结
 - [x] M1：布局与导航基线完成
-- [ ] M2：内容系统（blog/life/thoughts）打通
+- [x] M2：内容系统（blog/life/thoughts）打通
 - [ ] M3：体验基线（移动端 + a11y + SEO）
 - [ ] M4：构建通过并部署到 Vercel
 
@@ -34,23 +34,33 @@
 - [x] 新增示例文章并验证静态生成产物（`/blog/hello-static-blog`）
 - [x] 修复 MDX 构建依赖缺失（安装 `micromark-util-subtokenize`）
 - [x] 本地 `npm run build` 再次通过（Blog 路由静态化成功）
+- [x] 首页四区块实现（核心定位、技术栈、项目、爱好）
+- [x] 首页路由 `/` 接入并通过静态构建验证
+- [x] `/life` 时间轴页面实现（按日期分组 + 时间轴样式）
+- [x] `/life` 内容渲染支持封面图与正文配图（MDX）
+- [x] 补充 life 示例内容并通过构建验证（`/life` 静态生成）
+- [x] `/thoughts` Tab + 列表页面实现（按 `category` 过滤）
+- [x] thoughts 内容渲染支持正文配图（MDX）
+- [x] 补充 thoughts 示例内容并通过构建验证
+- [x] SEO 基线补充（根布局 description + 页面级 metadata）
+- [x] 全站 `npm run build` 持续通过（含 Home/Blog/Life/Thoughts）
+- [x] 修复 lint 流程（迁移到 ESLint flat config，`npm run lint` 可执行）
+- [x] 全站自动化联调完成（lint + build）
 
 ## 进行中
 
-- [ ] 主页四区块实现（核心定位、技术栈、项目、爱好）
+- [ ] 全站联调（路由高亮、移动端导航、可访问性）
 
 ## 待办（按优先级）
 
-1. 实现首页四区块（核心定位、技术栈、项目、爱好）
-2. 实现 `/life` 时间轴页面（支持封面与正文配图）
-3. 实现 `/thoughts` Tab + 列表页面
-4. 补充 SEO 基线（description、页面级 metadata）
-5. 全站联调（路由高亮、移动端导航、可访问性）
+1. 全站联调（路由高亮、移动端导航、可访问性）
+2. 连接 Vercel 完成上线验证
 
 ## 风险与阻塞
 
 - 当前无阻塞
 - 风险：空状态策略为“直接留白”，可发现性较弱，后续可能需要回调
+- 风险：`/life` 页面使用外链 `<img>`，当前 lint 为 warning（性能可优化项，非阻塞）
 
 ## 决策日志
 
@@ -63,5 +73,11 @@
 
 ## 下一步（执行顺序）
 
-- 先实现首页四区块并完成首页可访问
-- 再实现 life 与 thoughts 页面并做整体回归
+- 先做手动联调（桌面/移动端/键盘可达）
+- 再连接 Vercel 完成上线验证
+
+## 新 Session 交接要点
+
+- 内容链路已完成：`/blog`、`/life`、`/thoughts` 均可渲染并参与构建
+- 自动化检查现状：`npm run build` 通过，`npm run lint` 通过（含 1 条非阻塞 warning）
+- 联调重点：移动端菜单收起行为、导航高亮一致性、键盘焦点可见与可达

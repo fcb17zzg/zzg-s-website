@@ -5,5 +5,6 @@ export interface Post {
   tags?: string[];
   summary?: string;
   category?: string;
+  cover?: string;
   content?: string;
 }

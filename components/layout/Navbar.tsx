@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navigationLinks, socialLinks, wechatId } from '@/lib/data';
@@ -19,10 +19,6 @@ export default function Navbar() {
 
   const mainLinks = useMemo(() => navigationLinks, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
   async function handleCopyWechat() {
     try {
       await navigator.clipboard.writeText(wechatId);
@@ -32,6 +28,10 @@ export default function Navbar() {
       setCopyLabel('Failed');
       setTimeout(() => setCopyLabel('WeChat'), 1200);
     }
+  }
+
+  function closeMenu() {
+    setIsOpen(false);
   }
 
   return (
@@ -97,6 +97,7 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
+                  onClick={closeMenu}
                   aria-current={isActive(pathname, href) ? 'page' : undefined}
                   className={`text-sm transition-colors duration-200 ${isActive(pathname, href) ? 'text-gray-900 font-medium' : 'text-gray-500 hover:text-gray-800'}`}
                 >
@@ -110,6 +111,7 @@ export default function Navbar() {
                 <Link
                   key={label}
                   href={href}
+                  onClick={closeMenu}
                   target={external ? '_blank' : undefined}
                   rel={external ? 'noreferrer' : undefined}
                   className="text-sm text-gray-500 hover:text-gray-800 transition-colors duration-200"
@@ -120,7 +122,10 @@ export default function Navbar() {
 
               <button
                 type="button"
-                onClick={handleCopyWechat}
+                onClick={async () => {
+                  closeMenu();
+                  await handleCopyWechat();
+                }}
                 className="text-left text-sm text-gray-500 hover:text-gray-800 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded"
               >
                 {copyLabel}

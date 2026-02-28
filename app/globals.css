@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "@tailwindcss/typography";
+
+:root {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}

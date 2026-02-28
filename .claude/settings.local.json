@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /h/my_personal_page && npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --no-import-alias --eslint 2>&1)",
+      "Bash(true:*)",
+      "Bash(cd /h/my_personal_page && npm init -y 2>&1)",
+      "Bash(tail:*)"
+    ]
+  }
+}

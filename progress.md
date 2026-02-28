@@ -28,19 +28,24 @@
 - [x] Navbar 重构（桌面导航 + 移动端汉堡 + 社交入口 + WeChat 复制）
 - [x] 高亮规则实现（前缀匹配 + 首页单独规则）
 - [x] 本地 `npm run build` 构建通过（Exit Code 0）
+- [x] Blog 数据层增强（frontmatter 兜底 + 日期排序健壮性）
+- [x] `/blog` 列表页实现（标题/日期/摘要/标签）
+- [x] `/blog/[slug]` 详情页实现（`generateStaticParams` + MDX 正文渲染）
+- [x] 新增示例文章并验证静态生成产物（`/blog/hello-static-blog`）
+- [x] 修复 MDX 构建依赖缺失（安装 `micromark-util-subtokenize`）
+- [x] 本地 `npm run build` 再次通过（Blog 路由静态化成功）
 
 ## 进行中
 
-- [ ] Blog 链路实现（列表页 + 详情页 + 静态生成）
+- [ ] 主页四区块实现（核心定位、技术栈、项目、爱好）
 
 ## 待办（按优先级）
 
-1. 打通 `/blog` 列表页与详情页（含静态生成）
-2. 实现首页四区块（核心定位、技术栈、项目、爱好）
-3. 实现 `/life` 时间轴页面（支持封面与正文配图）
-4. 实现 `/thoughts` Tab + 列表页面
-5. 补充 SEO 基线（description、页面级 metadata）
-6. 全站联调（路由高亮、移动端导航、可访问性）
+1. 实现首页四区块（核心定位、技术栈、项目、爱好）
+2. 实现 `/life` 时间轴页面（支持封面与正文配图）
+3. 实现 `/thoughts` Tab + 列表页面
+4. 补充 SEO 基线（description、页面级 metadata）
+5. 全站联调（路由高亮、移动端导航、可访问性）
 
 ## 风险与阻塞
 
@@ -58,5 +63,5 @@
 
 ## 下一步（执行顺序）
 
-- 先进入 blog 数据层与页面打通
-- 最后实现 life 与 thoughts 页面并做整体回归
+- 先实现首页四区块并完成首页可访问
+- 再实现 life 与 thoughts 页面并做整体回归

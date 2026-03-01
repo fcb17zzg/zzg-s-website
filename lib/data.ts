@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'zzg',
+  name: 'Home',
   headline: '构建可靠 Web 产品的全栈工程师',
   bio: '关注工程效率、产品可用性与长期可维护性。这里记录技术实践、项目复盘和持续学习。',
   location: "中国",

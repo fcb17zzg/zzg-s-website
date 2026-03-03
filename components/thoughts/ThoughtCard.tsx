@@ -1,11 +1,14 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import Link from 'next/link';
 import { Post } from '@/lib/types';
+import { truncateSummary } from '@/lib/summary';
 
 type ThoughtCardProps = {
   post: Post;
 };
 
 export default function ThoughtCard({ post }: ThoughtCardProps) {
+  const summary = truncateSummary(post.summary ?? '');
+
   return (
     <article className="rounded-xl border border-warm-300/60 bg-warm-50 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 animate-fade-up">
       <div className="flex flex-wrap items-center gap-2 text-xs text-ink-400">
@@ -17,13 +20,13 @@ export default function ThoughtCard({ post }: ThoughtCardProps) {
         ) : null}
       </div>
 
-      <h3 className="mt-3 font-serif text-lg text-ink-900">{post.title}</h3>
-      {post.summary ? <p className="mt-2 text-sm text-ink-600 leading-6">{post.summary}</p> : null}
-
-      {post.content ? (
-        <div className="mt-4 prose prose-neutral max-w-none text-sm">
-          <MDXRemote source={post.content} />
-        </div>
+      <Link href={`/thoughts/${post.slug}`} className="block group/title">
+        <h3 className="mt-3 font-serif text-lg text-ink-900 group-hover/title:text-sage-600 transition-colors duration-200">{post.title}</h3>
+      </Link>
+      {summary ? (
+        <p className="mt-2 text-sm text-ink-600 leading-6 overflow-hidden [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+          {summary}
+        </p>
       ) : null}
     </article>
   );

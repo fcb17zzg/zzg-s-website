@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ThoughtCard from '@/components/thoughts/ThoughtCard';
-import { getPostBySlug, getAllPosts } from '@/lib/mdx';
+import { getAllPosts } from '@/lib/mdx';
 
 export const metadata: Metadata = {
   title: 'Thoughts',
@@ -36,8 +36,6 @@ export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) 
     return null;
   }
 
-  const posts = filtered.map((meta) => getPostBySlug('thoughts', meta.slug));
-
   return (
     <section className="space-y-6">
       <div className="flex flex-wrap gap-2 border-b border-warm-300/60 pb-3">
@@ -59,7 +57,7 @@ export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) 
       </div>
 
       <div className="space-y-4">
-        {posts.map((post) => (
+        {filtered.map((post) => (
           <ThoughtCard key={post.slug} post={post} />
         ))}
       </div>

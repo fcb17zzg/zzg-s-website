@@ -34,7 +34,7 @@ main函数：传入用户的输入
 
 ## 工具
 
-第二章也很简单，只是增加了工具的数量，在发送内容的tools（如上图）中告诉模型有哪些工具可以调用，并且明确工具的调用格式。这个“格式”其实就是每个工具都带一个 input_schema（JSON Schema 子集）：先声明 type=object，再给出 properties（参数名和类型），最后用 required 规定必填项。比如 bash 要求 {"command": "string"}，read_file 要求 path 必填、limit 可选，edit_file 则强制 path/old_text/new_text 三个字段都要给。模型如果少传字段、字段类型不对，或者传了 schema 以外的数据，都会在执行前被 API 拦截。这消除了一整类错误：模型无法传递格式错误的输入，因为 API 会在执行前校验 schema。这也使模型的意图变得明确——当它用特定字符串调用 edit_file 时，不存在关于它想修改什么的解析歧义。具体的工具还可以用沙箱来约束安全性，用一个dispatch map注册这些工具，再加一个handler来分派映射：![image-20260317211148144](/images/blog/claude-code-learning/image-20260317211148144.png)
+第二章也很简单，只是增加了工具的数量，在发送内容的tools（如上图）中告诉模型有哪些工具可以调用，并且明确工具的调用格式。这个“格式”其实就是每个工具都带一个 `input_schema`（JSON Schema 子集）：先声明 `type=object`，再给出 `properties`（参数名和类型），最后用 `required` 规定必填项。比如 bash 要求 `{"command": "string"}`，`read_file` 要求 `path` 必填、`limit` 可选，`edit_file` 则强制 `path/old_text/new_text` 三个字段都要给。模型如果少传字段、字段类型不对，或者传了 schema 以外的数据，都会在执行前被 API 拦截。这消除了一整类错误：模型无法传递格式错误的输入，因为 API 会在执行前校验 schema。这也使模型的意图变得明确——当它用特定字符串调用 `edit_file` 时，不存在关于它想修改什么的解析歧义。具体的工具还可以用沙箱来约束安全性，用一个 `dispatch map` 注册这些工具，再加一个 `handler` 来分派映射：![image-20260317211148144](/images/blog/claude-code-learning/image-20260317211148144.png)
 
 ![image-20260317211327050](/images/blog/claude-code-learning/image-20260317211327050.png)
 
@@ -61,7 +61,7 @@ TodoManager 就是 todo 工具背后的状态机。它做了三层事：
 2) 归一化：把 id/text/status 清洗成统一格式，覆盖写入 self.items。
 3) 可视化：render 时把状态映射成 [ ] / [>] / [x]，并追加 (done/total) 统计。
 
-在 agent_loop 里还有个很实用的“催更机制”：如果连续若干轮（我这里改成了 1 轮）没有调用 todo，就自动往下一轮结果里插入 <reminder>Update your todos.</reminder>，强制模型回到计划驱动，而不是在长对话里自由漂移。
+在 agent_loop 里还有个很实用的“催更机制”：如果连续若干轮（我这里改成了 1 轮）没有调用 todo，就自动往下一轮结果里插入 `<reminder>Update your todos.</reminder>`，强制模型回到计划驱动，而不是在长对话里自由漂移。
 
 ![image-20260317213008655](/images/blog/claude-code-learning/image-20260317213008655.png)
 
@@ -83,7 +83,7 @@ task 工具本质是一个“上下文隔离的委托调用器”。
 
 先看 PARENT_TOOLS：它是在基础文件工具之上额外增加了 task。task 的输入有两个字段：prompt（必填，真正交给子 agent 的任务说明）和 description（可选，给父 agent/日志看的短描述）。
 
-再看 run_subagent：父 agent 调用 task 后，不是在当前 messages 里继续，而是新建 sub_messages=[{"role": "user", "content": prompt}]，也就是从空上下文启动一个子循环。子 agent 只拿 CHILD_TOOLS（故意不包含 task，避免递归套娃），在自己的循环里执行工具、回填 tool_result，直到 stop_reason 不再是 tool_use。最后只把“最终文本总结”返回给父 agent。
+再看 run_subagent：父 agent 调用 task 后，不是在当前 messages 里继续，而是新建 `sub_messages=[{"role": "user", "content": prompt}]`，也就是从空上下文启动一个子循环。子 agent 只拿 CHILD_TOOLS（故意不包含 task，避免递归套娃），在自己的循环里执行工具、回填 tool_result，直到 stop_reason 不再是 tool_use。最后只把“最终文本总结”返回给父 agent。
 
 这套机制的价值是：文件系统是共享的（子 agent 改的文件父 agent 看得到），但对话上下文不共享（父上下文不会被子过程细节污染），所以父 agent 能把复杂探索外包出去，同时保持主线程上下文干净。
 
@@ -101,7 +101,7 @@ SkillLoader 会扫描 skills/SKILL.md，解析每个文件头部的 YAML frontma
 启动时把 skill 名称+描述注入到 SYSTEM 里，相当于告诉模型“有什么能力可用”，成本低。
 
 2) 第二层（按需加载全文）
-当模型调用 load_skill(name) 工具时，SkillLoader.get_content 会把对应 skill 正文包装成 <skill name="...">...</skill> 放到 tool_result 返回。模型拿到后再按这份详细步骤执行。
+当模型调用 `load_skill(name)` 工具时，`SkillLoader.get_content` 会把对应 skill 正文包装成 `<skill name="...">...</skill>` 放到 `tool_result` 返回。模型拿到后再按这份详细步骤执行。
 
 所以 agent 调用 skill 的过程其实是：先在 system 里“看目录”，判断是否需要某个专长，再通过工具“按需读全文”。这样既保留可扩展性，也避免上下文被一次性塞爆。
 

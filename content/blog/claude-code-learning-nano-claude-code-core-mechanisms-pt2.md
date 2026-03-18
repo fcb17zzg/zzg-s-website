@@ -1,4 +1,11 @@
-﻿# Claude Code学习--从搭建Nano Claude Code学习CC机制的底层原理pt2
+﻿---
+title: "Claude Code学习：从搭建 Nano Claude Code 理解 CC 机制底层原理（pt2）"
+date: "2026-03-18"
+tags: ["claude-code", "agent", "multi-agent", "task-system"]
+summary: "聚焦任务系统、后台任务与 agent 团队协作，拆解持久化任务 DAG、异步执行回收以及消息总线的实现机制。"
+---
+
+# Claude Code学习--从搭建Nano Claude Code学习CC机制的底层原理pt2
 
 ## 任务系统
 

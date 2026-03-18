@@ -1,4 +1,11 @@
-﻿# Claude Code学习--从搭建Nano Claude Code学习CC机制的底层原理
+﻿---
+title: "Claude Code学习：从搭建 Nano Claude Code 理解 CC 机制底层原理"
+date: "2026-03-17"
+tags: ["claude-code", "agent", "llm", "debugging"]
+summary: "从 agent loop、工具调用、todo、子 agent、skills 到上下文压缩，系统梳理 learn-claude-code 的核心机制与调试心得。"
+---
+
+# Claude Code学习--从搭建Nano Claude Code学习CC机制的底层原理
 
 最近我学习了开源项目https://github.com/shareAI-lab/learn-claude-code，里面用一组从简到繁的最小示例，把 Claude Code 的核心机制拆成了 12 个章节：从最基础的 agent loop、工具调用，到 todo 计划、子 agent、skill 加载、上下文压缩，再到多 agent 团队协作。它不是那种“只讲概念”的教程，而是每一章都能直接运行、直接改、直接打日志观察行为。所以我打算按照这里面的目录来记录我是怎么通过调试，阅读代码和项目文章来深入学习的。
 
